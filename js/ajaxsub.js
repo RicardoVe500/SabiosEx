@@ -12,6 +12,7 @@ $(function(){
                 type: "POST",
                 success: function(response) {
                     let tasks = JSON.parse(response);
+                    
                     let template = ``;
                     tasks.forEach(task => {
                         template += `<li><a href="#" class="task-item">${task.nombreCuenta}</a></li>`
@@ -30,6 +31,39 @@ $(function(){
 
     })
 
+    $(document).ready(function() {
+        // Llenar el select con datos de movimientos al cargar la página
+        $.ajax({
+            url: "controllers/subcuentas/select.php",
+            type: "GET",
+            success: function(response) {
+                try {
+                    // Intenta analizar la respuesta como JSON
+                    let movimientos = JSON.parse(response);
+                    console.log(response)
+    
+                    // Variable para acumular opciones del select
+                    
+                    let options = "";
+    
+                    // Iterar sobre cada movimiento y construir las opciones
+                    movimientos.forEach(movimiento => {
+                        options += `<option value="${movimiento.movimientoId}">${movimiento.movimiento}</option>`;
+                    });
+    
+                    // Asignar todas las opciones al select una sola vez
+                    $('#selectsubcuentas').html(options);
+    
+                } catch (error) {
+                    console.error("Error al procesar la respuesta JSON:", error);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error("Error al obtener los movimientos:", textStatus, errorThrown);
+            }
+        });
+    }),
+
    $("#insertmodal").submit(e => {
     e.preventDefault();
     const postData = {
@@ -37,7 +71,7 @@ $(function(){
         nombreCuenta: $("#nombreCuenta").val(),
     }
     $.ajax({
-        url: "controllers/catalogo/insertcatalogo.php",
+        url: "controllers/catalogo/insertsubcuenta.php",
         data: postData,
         type: "POST",
         success: function(response) {
@@ -56,6 +90,8 @@ $(function(){
     })
    })
 
+
+
    function fecthData(){
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
@@ -65,7 +101,7 @@ $(function(){
             data: { id },
             type: "GET",
             success: function(response) {
-                const tasks = JSON.parse(response);
+                const tasks = JSON.parse(response); 
                 let template = ``;
                 tasks.forEach(task =>
                 {
@@ -76,7 +112,6 @@ $(function(){
                         <td>${task.cuentaDependiente}</td>
                         <td>${task.nivelCuenta}</td>
                         <td>${task.movimientoId}</td>
-                        <td>${task.nivelCuenta}</td>
                     <td>
                         <button type="button" class="btn btn-success btn-sm edit-modal" data-toggle="modal" data-target="#editmodalcatalogo"><i class="fas fa-edit"></i> Modificar</button>
                         <button type="button" class="btn btn-danger btn-sm delete-catalogo"><i class="fas fa-trash-alt"></i> Eliminar</button>

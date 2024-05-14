@@ -41,13 +41,13 @@ include('contenido/head.php');
                         <div class="card-body">
                            
                             <?php 
-                            include('contenido/modal/catalogo/modalcatalogo.php');
+                            include('contenido/modal/subcuentas/modalsubcuentas.php');
                             include('contenido/modal/catalogo/editmodalcatalogo.php');
 
                             ?>
-                                <a class="btn btn-success float-right" href="#" data-toggle="modal" data-target="#modalcatalogo"><i class="fas fa-plus"></i> Crear</a>
+                                <a class="btn btn-success float-right" href="#" data-toggle="modal" data-target="#modalsubcatalogo"><i class="fas fa-plus"></i> Crear</a>
 
-                            <h3>Catalogo de Cuentas</h3>
+                            <h3>Catalogo de Subcuentas</h3>
                         <div class="card" id="task-result">
                             <div class="card-body">
 
@@ -65,6 +65,7 @@ include('contenido/head.php');
                                             <th scope="col" WIDTH="200">Movimientos</th>
                                             <th scope="col">Nivel de la cuenta</th>
                                             <th scope="col">Accion</th>
+                                            <th scope="col"></th>
 
                                         </tr>
                                     </thead>

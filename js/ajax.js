@@ -1,7 +1,7 @@
 $(function(){
     $("#task-result").hide()
     fecthData()
-    let edit = false;
+
 
     $("#search").keyup(()=>{
         if($("#search").val()){
@@ -65,28 +65,27 @@ $(function(){
             let template = ``;
             tasks.forEach(task =>
             {
+                
                 template += `
                 <tr taskId="${task.cuentaId}">
                     <td>${task.nombreCuenta}</td>
-                    <td data-num="${task.numeroCuenta}">${task.numeroCuenta}</td>
-                    <td>${task.movimientoId}</td>
+                    <td>${task.numeroCuenta}</td>
+                    <td>${task.movimiento}</td>
                     <td>${task.nivelCuenta}</td>
                 <td>
-
-                    <button herf="subcuentas.php" type="button" class="btn btn-primary btn-sm subcuentas-btn" data-num="${task.numeroCuenta}"><i class="fas fa-layer-group"></i> SubCuentas</button>
+                    <button type="button" class="btn btn-primary btn-sm subcuentas-btn" dataId="${task.numeroCuenta}"><i class="fas fa-layer-group"></i> SubCuentas</button>
                     <button type="button" class="btn btn-success btn-sm edit-modal" data-toggle="modal" data-target="#editmodalcatalogo"><i class="fas fa-edit"></i> Modificar</button>
                     <button type="button" class="btn btn-danger btn-sm delete-catalogo"><i class="fas fa-trash-alt"></i> Eliminar</button>
-
                 </td>
                 </tr>
                 `;
             })
             $("#datoscuerpo").html(template);
-            $("#datoscuerpo").on("click", "tr", function() {
+            $("#datoscuerpo").on("click", ".subcuentas-btn", function() {
                 // Obtener el ID de la fila seleccionada
-                const taskId = $(this).attr("taskId");
+                const dataId = $(this).attr("dataId");
                 // Redirigir a la página subcuentas.html con el ID como parámetro
-                window.location.href = `subcuentas.php?id=${taskId}`;
+                window.location.href = `subcuentas.php?id=${dataId}`;
             });
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -133,7 +132,7 @@ $(document).on("click", ".edit-modal", ()=>{
             $("#taskId").val(task.cuentaId)
             $("#editnumeroCuenta").val(task.numeroCuenta)
             $("#editnombreCuenta").val(task.nombreCuenta)
-            edit = true
+            
         },
         
     })

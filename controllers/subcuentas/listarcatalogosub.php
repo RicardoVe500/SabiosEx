@@ -2,12 +2,11 @@
 include('../../conexion/conexion.php');
 
 
-
 if (isset($_GET['id'])) {
 
   $cuentaId = $_GET['id'];
 
-  $query = "SELECT * FROM catalogoCuentas WHERE cuentaId LIKE '$cuentaId%'";
+  $query = "SELECT * FROM catalogoCuentas WHERE numeroCuenta LIKE '$cuentaId%'";
 
   $result = mysqli_query($conexion, $query);
 

@@ -6,7 +6,8 @@ if (isset($_POST['numeroCuenta'])) {
   
 // Obtener movimientoId enviado desde JavaScript
   $movimientos = 1;
-  $nivelcuenta = 1;
+  
+  $nivelcuenta ++;
   $numerocuenta = $_POST["numeroCuenta"];
   $nombrecuenta = $_POST["nombreCuenta"];
   $fechaHoraActual = date("Y-m-d H:i:s"); 

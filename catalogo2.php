@@ -123,7 +123,7 @@ include('contenido/head.php');
                     <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
-        </div>
+        </div> 
     </div>
 
     <?php
