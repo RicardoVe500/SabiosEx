@@ -8,19 +8,21 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form id="insertmodal">
+            <form id="insertsubmodal">
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12">
+                                <input class="form-control" type="hidden" name="taskId" id="taskId">
+                                <input class="form-control" type="hidden" name="nivelCuenta" id="nivelCuenta">
                                 <label for="Nombrecuenta">Numero Cuenta:</label>
-                                <input class="form-control" type="text" placeholder="Numero Cuenta" id="numeroCuenta">
+                                <input class="form-control" type="text" placeholder="Numero Cuenta" id="numerosub">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-8">
                                 <label for="Nombrecuenta" style="margin-top: 10px;">Nombre Cuenta:</label>
-                                <input class="form-control" type="text" placeholder="Nombre Cuenta" id="nombreCuenta">
+                                <input class="form-control" type="text" placeholder="Nombre Cuenta" id="nombresub">
                             </div>
                             <div class="col-sm-4">
                                 <label for="Nombrecuenta" style="margin-top: 10px;" >Movimientos:</label>
@@ -33,7 +35,6 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-
                     <input class="btn btn-success as fa-save" type="submit" value="Guardar" name="btningresar">
 
                 </div>

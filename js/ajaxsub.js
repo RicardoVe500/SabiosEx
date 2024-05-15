@@ -40,7 +40,7 @@ $(function(){
                 try {
                     // Intenta analizar la respuesta como JSON
                     let movimientos = JSON.parse(response);
-                    console.log(response)
+                   
     
                     // Variable para acumular opciones del select
                     
@@ -64,14 +64,35 @@ $(function(){
         });
     }),
 
-   $("#insertmodal").submit(e => {
+    $(document).on("click", ".create-modal", ()=>{
+        const element = $(this)[0].activeElement.parentElement.parentElement;
+        const cuentaId = $(element).attr("taskId")  
+        let url = "controllers/subcuentas/obtenerdato.php";
+        $.ajax({
+            url,
+            data: {cuentaId},
+            type: "POST",
+            success: function(response){
+                const task = JSON.parse(response)
+                $("#taskId").val()
+                $("#nivelCuenta").val(task.nivelCuenta)
+                $("#numerosub").val(task.numeroCuenta)
+                $("#nombresub").val(task.nombreCuenta)
+                console.log(task)
+            },
+        })
+    }) 
+
+   $("#insertsubmodal").submit(e => {
     e.preventDefault();
     const postData = {
-        numeroCuenta: $("#numeroCuenta").val(),
-        nombreCuenta: $("#nombreCuenta").val(),
+        numeroCuenta: $("#numerosub").val(),
+        nombreCuenta: $("#nombresub").val(),
+        nivelCuenta: $("#nivelCuenta").val(),
+        movimientos: $("#selectsubcuentas").val(),
     }
     $.ajax({
-        url: "controllers/catalogo/insertsubcuenta.php",
+        url: "controllers/subcuentas/insertsubcuenta.php",
         data: postData,
         type: "POST",
         success: function(response) {
@@ -81,7 +102,7 @@ $(function(){
                 text: 'La cuenta se agrego exitosamente.',
             });
             fecthData()
-            $("#insertmodal").trigger("reset")
+            $("#insertsubmodal").trigger("reset")
         },
         error: function(jqXHR, textStatus, errorThrown) {
             // Manejo de errores si la solicitud AJAX falla
@@ -89,7 +110,6 @@ $(function(){
         }
     })
    })
-
 
 
    function fecthData(){
@@ -109,10 +129,10 @@ $(function(){
                     <tr taskId="${task.cuentaId}">
                         <td>${task.nombreCuenta}</td>
                         <td>${task.numeroCuenta}</td>
-                        <td>${task.cuentaDependiente}</td>
                         <td>${task.nivelCuenta}</td>
-                        <td>${task.movimientoId}</td>
+                        <td>${task.movimiento}</td>
                     <td>
+                        <a class="btn btn-primary btn-sm create-modal" href="#" data-toggle="modal" data-target="#modalsubcatalogo"><i class="fas fa-plus"></i> Crear Subcuenta</a>
                         <button type="button" class="btn btn-success btn-sm edit-modal" data-toggle="modal" data-target="#editmodalcatalogo"><i class="fas fa-edit"></i> Modificar</button>
                         <button type="button" class="btn btn-danger btn-sm delete-catalogo"><i class="fas fa-trash-alt"></i> Eliminar</button>
                     </td>
@@ -169,7 +189,6 @@ $(document).on("click", ".edit-modal", ()=>{
             $("#taskId").val(task.cuentaId)
             $("#editnumeroCuenta").val(task.numeroCuenta)
             $("#editnombreCuenta").val(task.nombreCuenta)
-            edit = true
         },
         
     })
@@ -182,7 +201,7 @@ $(document).on("click", ".edit-modal", ()=>{
         numeroCuenta: $("#editnumeroCuenta").val(),
         nombreCuenta: $("#editnombreCuenta").val(),
     }
-    console.log(pData)
+    
     $.ajax({
         url: "controllers/catalogo/updatecatalogo.php",
         data: pData,

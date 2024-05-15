@@ -145,7 +145,6 @@ $(document).on("click", ".edit-modal", ()=>{
         numeroCuenta: $("#editnumeroCuenta").val(),
         nombreCuenta: $("#editnombreCuenta").val(),
     }
-    console.log(pData)
     $.ajax({
         url: "controllers/catalogo/updatecatalogo.php",
         data: pData,
