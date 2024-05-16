@@ -4,17 +4,20 @@ include('../../conexion/conexion.php');
 
 $search = $_POST["search"];
 
-if (!empty($search)) {
+// If para identificar el rol segun los diferentes criterios de busqueda
+if (!empty($search)) { 
     $query = "SELECT * FROM tipousuario WHERE codigotipo LIKE '$search%' ";
     $result = mysqli_query($conexion, $query);
 
+    // Retorna error si no se realizo la consulta de forma correcta
     if (!$result) {
-        die("Error en la consulta".mysqli_error($conexion));
+        die("No se encontro ningun rol con esos criteros de busqueda.".mysqli_error($conexion));
         
     }
     
     $json = array();
 
+    //Criterios de busqueda 
     while ($row = mysqli_fetch_array($result)) {
         $json[] = array(
             "tipoUusarioId"=>$row["tipoUusarioId"],
