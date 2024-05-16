@@ -4,14 +4,30 @@ include('../../conexion/conexion.php');
 
 if (isset($_POST['numeroCuenta'])) {
   
-// Obtener movimientoId enviado desde JavaScript
-
   $nivelcuenta =  $_POST["nivelCuenta"] + 1;
   $movimientos = $_POST["movimientos"];
   $numerocuenta = $_POST["numeroCuenta"];
   $nombrecuenta = $_POST["nombreCuenta"];
   $fechaHoraActual = date("Y-m-d H:i:s"); 
-  $cuentaDependiente = substr($numerocuenta, 0, -2); ;
+  $nuevoNumeroCuenta = $numerocuenta . '01';
+  $cuentaDependiente = 
+
+  //Se efectual el automatizado del numeroCuenta y se le agrega el subjifo '0' y el numero que coresponde
+  $contador = 1;
+  while (true) {
+      $queryCheck = "SELECT COUNT(*) as count FROM catalogoCuentas WHERE numeroCuenta = '$nuevoNumeroCuenta'";
+      $resultCheck = mysqli_query($conexion, $queryCheck);
+      $rowCheck = mysqli_fetch_assoc($resultCheck);
+      if ($rowCheck['count'] > 0) {
+          $contador++;
+          $sufijo = str_pad($contador, 2, '0', STR_PAD_LEFT); 
+          $nuevoNumeroCuenta = $numerocuenta . $sufijo;
+      } else {
+          break;
+      }
+  }
+
+  $dependiente = substr($nuevoNumeroCuenta, 0, -2);
 
    // Obtener el nivel de cuenta más alto de la base de datos
    $queryMaxNivel = "SELECT MAX(nivelCuenta) as maxNivel FROM catalogoCuentas";
@@ -26,7 +42,7 @@ if (isset($_POST['numeroCuenta'])) {
 
        // Insertar los datos en la base de datos
        $queryInsert = "INSERT INTO catalogoCuentas(movimientoId, n1, n2, n3, n4, n5, n6, n7, n8, numeroCuenta, cuentaDependiente, nivelCuenta, nombreCuenta, usuarioAgrega, fechaAgrega, usuarioModifica, fechaModifica) 
-                       VALUES ('$movimientos','','','','','','','','','$numerocuenta','$cuentaDependiente','$nivelcuenta','$nombrecuenta','','$fechaHoraActual','','$fechaHoraActual')";
+                       VALUES ('$movimientos','','','','','','','','','$nuevoNumeroCuenta','$dependiente','$nivelcuenta','$nombrecuenta','','$fechaHoraActual','','$fechaHoraActual')";
 
        $resultInsert = mysqli_query($conexion, $queryInsert);
 

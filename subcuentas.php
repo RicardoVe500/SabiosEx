@@ -10,8 +10,6 @@ include('contenido/head.php');
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
-
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <?php
@@ -39,47 +37,32 @@ include('contenido/head.php');
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-body">
-                           
                             <?php 
                             include('contenido/modal/subcuentas/modalsubcuentas.php');
-                            include('contenido/modal/catalogo/editmodalcatalogo.php');
-
+                            include('contenido/modal/subcuentas/editmodalcatalogo.php');
                             ?>
-
                             <h3>Catalogo de Subcuentas</h3>
                         <div class="card" id="task-result">
                             <div class="card-body">
-
                                 <ul id="container"></ul>
-                                
                             </div>
                         </div>
-
                             <form id="task-from">
                                 <table id="datatable" class="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">Nombre</th>
-                                            <th scope="col" WIDTH="200">Numero cuenta</th>
-                                            <th scope="col" WIDTH="200">Movimientos</th>
-                                            <th scope="col">Nivel de la cuenta</th>
-
+                                            <th scope="col" >Numero cuenta</th>
+                                            <th scope="col">Cuenta dependiente</th>
+                                            <th scope="col">nivel cuenta</th>
+                                            <th scope="col">Movimiento</th>
+                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody id="datoscuerpo">
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
                                     </tbody>
                                 </table>
-                                
                             </form>
-
-
-
                         </div>
                     </div>
                 </div>
@@ -90,12 +73,8 @@ include('contenido/head.php');
 
             <!-- Footer -->
             <?php
-            
             include('contenido/footer.php')
-            
             ?>
-
-
             <!-- End of Footer -->
 
         </div>

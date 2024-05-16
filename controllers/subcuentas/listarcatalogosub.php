@@ -6,8 +6,18 @@ if (isset($_GET['id'])) {
 
   $cuentaId = $_GET['id'];
 
-  
-  $query = "SELECT * FROM catalogoCuentas WHERE numeroCuenta LIKE '$cuentaId%'";
+  $query = "SELECT 
+  catalogoCuentas.cuentaId,
+  movimientos.movimiento,
+  catalogoCuentas.numeroCuenta,
+  catalogoCuentas.cuentaDependiente,
+  catalogoCuentas.nivelCuenta,
+  catalogoCuentas.nombreCuenta
+  FROM 
+  catalogoCuentas 
+  LEFT JOIN 
+  movimientos  ON catalogoCuentas.movimientoId = movimientos.movimientoId
+  WHERE numeroCuenta LIKE '$cuentaId%';";
 
   $result = mysqli_query($conexion, $query);
 
@@ -20,8 +30,10 @@ if (isset($_GET['id'])) {
 
   while ($row = mysqli_fetch_array($result)) {
       $json[] = array(
+
             "cuentaId"=>$row["cuentaId"],
-            "movimientoId"=>$row["movimientoId"],
+            "movimiento"=>$row["movimiento"],
+            "cuentaDependiente"=>$row["cuentaDependiente"],
             "numeroCuenta"=>$row["numeroCuenta"],
             "nivelCuenta"=>$row["nivelCuenta"],
             "nombreCuenta"=>$row["nombreCuenta"],

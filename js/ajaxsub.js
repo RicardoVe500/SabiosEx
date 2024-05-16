@@ -122,6 +122,7 @@ $(function(){
             type: "GET",
             success: function(response) {
                 const tasks = JSON.parse(response); 
+                console.log(response)
                 let template = ``;
                 tasks.forEach(task =>
                 {
@@ -129,12 +130,18 @@ $(function(){
                     <tr taskId="${task.cuentaId}">
                         <td>${task.nombreCuenta}</td>
                         <td>${task.numeroCuenta}</td>
+                        <td>${task.cuentaDependiente}</td>
                         <td>${task.nivelCuenta}</td>
                         <td>${task.movimiento}</td>
                     <td>
                         <a class="btn btn-primary btn-sm create-modal" href="#" data-toggle="modal" data-target="#modalsubcatalogo"><i class="fas fa-plus"></i> Crear Subcuenta</a>
                         <button type="button" class="btn btn-success btn-sm edit-modal" data-toggle="modal" data-target="#editmodalcatalogo"><i class="fas fa-edit"></i> Modificar</button>
-                        <button type="button" class="btn btn-danger btn-sm delete-catalogo"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                        `;
+                        if (task.numeroCuenta.length > 1) {
+                            template += `
+                                 <button type="button" class="btn btn-danger btn-sm delete-catalogo"><i class="fas fa-trash-alt"></i> Eliminar</button>`;
+                        }
+                    template += `
                     </td>
                     </tr>
                     `;
@@ -179,7 +186,7 @@ $(function(){
 $(document).on("click", ".edit-modal", ()=>{
     const element = $(this)[0].activeElement.parentElement.parentElement;
     const cuentaId = $(element).attr("taskId")  
-    let url = "controllers/catalogo/obtenerdato.php";
+    let url = "controllers/subcuentas/obtenerdato.php";
     $.ajax({
         url,
         data: {cuentaId},
@@ -201,7 +208,6 @@ $(document).on("click", ".edit-modal", ()=>{
         numeroCuenta: $("#editnumeroCuenta").val(),
         nombreCuenta: $("#editnombreCuenta").val(),
     }
-    
     $.ajax({
         url: "controllers/catalogo/updatecatalogo.php",
         data: pData,

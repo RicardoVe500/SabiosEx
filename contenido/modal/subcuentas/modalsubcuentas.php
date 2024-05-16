@@ -14,20 +14,16 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <input class="form-control" type="hidden" name="taskId" id="taskId">
-                                <input class="form-control" type="hidden" name="nivelCuenta" id="nivelCuenta">
-                                <label for="Nombrecuenta">Numero Cuenta:</label>
-                                <input class="form-control" type="text" placeholder="Numero Cuenta" id="numerosub">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-8">
+                                <input class="form-control" type="text" name="nivelCuenta" id="nivelCuenta">
+                                <input class="form-control" type="hidden" placeholder="Numero Cuenta" id="numerosub">
                                 <label for="Nombrecuenta" style="margin-top: 10px;">Nombre Cuenta:</label>
                                 <input class="form-control" type="text" placeholder="Nombre Cuenta" id="nombresub">
                             </div>
-                            <div class="col-sm-4">
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
                                 <label for="Nombrecuenta" style="margin-top: 10px;" >Movimientos:</label>
                                 <select class="form-control" id="selectsubcuentas" name="selectsubcuentas">
-                                    
                                 </select>
                             </div>
                         </div>
