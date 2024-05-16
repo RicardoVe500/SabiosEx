@@ -16,7 +16,7 @@ if (isset($_POST["tipousuario"])) {
       
         //Mensaje de error
         if (!$result) {
-          echo "Error en la consulta".mysqli_error($conexion);
+          echo "Error al modificar el rol.".mysqli_error($conexion);
             
         }
         
