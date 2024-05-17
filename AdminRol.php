@@ -49,7 +49,7 @@ include('contenido/head.php')
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Buscar Roles de usuario</h5>
-                                <p class="card-text">Buscar roles de usuario</p>
+                                <p class="card-text">Buscar roles de usuario.</p>
                                 <a href="catalogo2.php" class="btn btn-primary">Ir</a>
                             </div>
                         </div>
