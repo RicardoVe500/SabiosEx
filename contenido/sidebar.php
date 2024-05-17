@@ -37,6 +37,7 @@
                         <h6 class="collapse-header">Administracion :</h6>
                         <a class="collapse-item" href="buttons.html">Usuarios</a>
                         <a class="collapse-item" href="catalogo2.php">Catalogo de cuentas</a>
+                        <a class="collapse-item" href="AdminRol.php">Administracion de roles</a> 
                     </div>
                 </div>
             </li>
