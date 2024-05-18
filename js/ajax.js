@@ -2,7 +2,6 @@ $(function(){
     $("#task-result").hide()
     fecthData()
 
-
     $("#search").keyup(()=>{
         if($("#search").val()){
             let search = $("#search").val();
@@ -163,7 +162,5 @@ $(document).on("click", ".edit-modal", ()=>{
     
    }) 
 
-})
-
-
+});
 

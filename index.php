@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+
 <?php
 include('contenido/head.php')
 ?>
@@ -69,9 +71,9 @@ include('contenido/head.php')
                     <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">x</h5>
-                                <p class="card-text">xxxxxxxxxxxxxxxxxxxxx.</p>
-                                <a href="#" class="btn btn-primary">Ir</a>
+                                <h5 class="card-title">Administrar Usuarios</h5>
+                                <p class="card-text">Se configura los usuarios.</p>
+                                <a href="aduser.php" class="btn btn-primary">Ir</a>
                             </div>
                         </div>
                     </div>
@@ -102,15 +104,15 @@ include('contenido/head.php')
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">¿Listo para Salir?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Selecciono "Cerrar Sesión", ¿Esta seguro?.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="login/login.php">Cerrar Sesión</a>
                 </div>
             </div>
         </div>
