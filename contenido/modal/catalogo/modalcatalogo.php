@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col">
                                 <label for="Nombrecuenta">Numero Cuenta:</label>
-                                <input class="form-control" type="text" placeholder="Nombre Cuenta" id="numeroCuenta" maxlength="1">
+                                <input class="form-control" id="numero" type="text" placeholder="Numero Cuenta" id="numeroCuenta" maxlength="1" required onkeypress="return isNumberKey(event)">
                             </div>
                             <div class="col">
                                 <label for="Nombrecuenta">Nombre Cuenta:</label>
@@ -32,3 +32,13 @@
         </div>
     </div>
 </div>
+
+<script>
+  function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
+</script>

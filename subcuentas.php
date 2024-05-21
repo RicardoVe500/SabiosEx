@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <?php
 include('contenido/head.php');
-
 ?>
-
 
 <body id="page-top">
 
@@ -48,7 +47,7 @@ include('contenido/head.php');
                             </div>
                         </div>
                             <form id="task-from">
-                                <table id="datatable" class="table">
+                                <table id="example" class="table" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th scope="col">Nombre</th>
@@ -107,7 +106,7 @@ include('contenido/head.php');
     include('contenido/js.php')
     ?>
 
-  <script src="js/ajaxsub.js"></script>
+<script src="js/ajaxsub.js"></script>
 
 </body>
 

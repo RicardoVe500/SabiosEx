@@ -5,7 +5,7 @@ include('../../conexion/conexion.php');
 $search = $_POST["search"];
 
 if (!empty($search)) {
-    $query = "SELECT * FROM catalogoCuentas WHERE nombreCuenta LIKE '$search%' ";
+    $query = "SELECT * FROM catalogoCuentas WHERE nombreCuenta LIKE '$search%' AND nivelCuenta != 1";
     $result = mysqli_query($conexion, $query);
 
     if (!$result) {

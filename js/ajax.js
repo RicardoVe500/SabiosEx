@@ -14,10 +14,21 @@ $(function(){
                     let tasks = JSON.parse(response);
                     let template = ``;
                     tasks.forEach(task => {
-                        template += `<li><a href="#" class="task-item">${task.nombreCuenta}</a></li>`
+                        template += `<tr taskId="${task.cuentaId}">
+                        <td>${task.nombreCuenta}</td>
+                        <td>${task.numeroCuenta}</td>
+                        <td>${task.movimiento}</td>
+                        <td>${task.nivelCuenta}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm subcuentas-btn" dataId="${task.numeroCuenta}"><i class="fas fa-layer-group"></i></button>
+                        <button type="button" class="btn btn-success btn-sm edit-modal" data-toggle="modal" data-target="#editmodalcatalogo"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-danger btn-sm delete-catalogo"><i class="fas fa-trash-alt"></i> </button>
+                    </td>
+                    </tr>`
                     });
-                    $("#task-result").show();
-                    $("#container").html(template)
+                    $("#datoscuerpo").html(template);
+                   
+                    
                     
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -65,7 +76,6 @@ $(function(){
             let template = ``;
             tasks.forEach(task =>
             {
-                
                 template += `
                 <tr taskId="${task.cuentaId}">
                     <td>${task.nombreCuenta}</td>
@@ -95,6 +105,7 @@ $(function(){
     })
 
    }
+   
 
    $(document).on("click", ".delete-catalogo", ()=>{
     const element = $(this)[0].activeElement.parentElement.parentElement;
@@ -161,6 +172,20 @@ $(document).on("click", ".edit-modal", ()=>{
     })
     
    }) 
+
+function uploadFile() {
+    var formData = new FormData(document.getElementById('upload-form'));
+    $.ajax({
+        url: 'importarexcel.php',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+        console.log('Respuesta del servidor: ' + response);
+            }
+        });
+    }
 
 })
 

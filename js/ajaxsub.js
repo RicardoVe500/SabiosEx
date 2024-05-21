@@ -7,19 +7,35 @@ $(function(){
         if($("#search").val()){
             let search = $("#search").val();
             $.ajax({
-                url:"co",
+                url:"controllers/subcuentas/buscarsub.php",
                 data: {search : search},
                 type: "POST",
                 success: function(response) {
                     let tasks = JSON.parse(response);
-                    
                     let template = ``;
-                    tasks.forEach(task => {
-                        template += `<li><a href="#" class="task-item">${task.nombreCuenta}</a></li>`
-                    });
-                    $("#task-result").show();
-                    $("#container").html(template)
-                    
+                    tasks.forEach(task =>
+                        {
+                            template += `
+                            <tr taskId="${task.cuentaId}">
+                                <td>${task.nombreCuenta}</td>
+                                <td>${task.numeroCuenta}</td>
+                                <td>${task.cuentaDependiente}</td>
+                                <td>${task.nivelCuenta}</td>
+                                <td>${task.movimiento}</td>
+                            <td>
+                                <a class="btn btn-primary btn-sm create-modal" href="#" data-toggle="modal" data-target="#modalsubcatalogo"><i class="fas fa-plus"></i> </a>
+                                <button type="button" class="btn btn-success btn-sm edit-modal" data-toggle="modal" data-target="#editmodalcatalogo"><i class="fas fa-edit"></i> </button>
+                                `;
+                                if (task.numeroCuenta.length > 1) {
+                                    template += `
+                                         <button type="button" class="btn btn-danger btn-sm delete-catalogo"><i class="fas fa-trash-alt"></i> </button>`;
+                                }
+                            template += `
+                            </td>
+                            </tr>
+                            `;
+                        })
+                    $("#datoscuerpo").html(template);  
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     // Manejo de errores si la solicitud AJAX falla
@@ -40,17 +56,12 @@ $(function(){
                 try {
                     // Intenta analizar la respuesta como JSON
                     let movimientos = JSON.parse(response);
-                   
-    
                     // Variable para acumular opciones del select
-                    
                     let options = "";
-    
                     // Iterar sobre cada movimiento y construir las opciones
                     movimientos.forEach(movimiento => {
                         options += `<option value="${movimiento.movimientoId}">${movimiento.movimiento}</option>`;
                     });
-    
                     // Asignar todas las opciones al select una sola vez
                     $('#selectsubcuentas').html(options);
     
@@ -77,8 +88,8 @@ $(function(){
                 $("#taskId").val()
                 $("#nivelCuenta").val(task.nivelCuenta)
                 $("#numerosub").val(task.numeroCuenta)
-                $("#nombresub").val(task.nombreCuenta)
-                console.log(task)
+                $("#nombresub").val()
+               
             },
         })
     }) 
@@ -111,8 +122,7 @@ $(function(){
     })
    })
 
-
-   function fecthData(){
+    function fecthData(){
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
     if (id) { 
@@ -134,12 +144,12 @@ $(function(){
                         <td>${task.nivelCuenta}</td>
                         <td>${task.movimiento}</td>
                     <td>
-                        <a class="btn btn-primary btn-sm create-modal" href="#" data-toggle="modal" data-target="#modalsubcatalogo"><i class="fas fa-plus"></i> Crear Subcuenta</a>
-                        <button type="button" class="btn btn-success btn-sm edit-modal" data-toggle="modal" data-target="#editmodalcatalogo"><i class="fas fa-edit"></i> Modificar</button>
+                        <a class="btn btn-primary btn-sm create-modal" href="#" data-toggle="modal" data-target="#modalsubcatalogo"><i class="fas fa-plus"></i> </a>
+                        <button type="button" class="btn btn-success btn-sm edit-modal" data-toggle="modal" data-target="#editmodalcatalogo"><i class="fas fa-edit"></i> </button>
                         `;
                         if (task.numeroCuenta.length > 1) {
                             template += `
-                                 <button type="button" class="btn btn-danger btn-sm delete-catalogo"><i class="fas fa-trash-alt"></i> Eliminar</button>`;
+                                 <button type="button" class="btn btn-danger btn-sm delete-catalogo"><i class="fas fa-trash-alt"></i> </button>`;
                         }
                     template += `
                     </td>
@@ -147,6 +157,9 @@ $(function(){
                     `;
                 })
                 $("#datoscuerpo").html(template);
+                $('#example').DataTable({
+                    "order": [[2, "asc"]] // Ordenar por la columna de nivelCuenta de manera descendente
+                });
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 // Manejo de errores si la solicitud AJAX falla
@@ -159,6 +172,8 @@ $(function(){
     }
     
    }
+
+  
 
    $(document).on("click", ".delete-catalogo", ()=>{
     const element = $(this)[0].activeElement.parentElement.parentElement;

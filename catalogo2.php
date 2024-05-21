@@ -39,23 +39,35 @@ include('contenido/head.php');
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-body">
-                           
+
                             <?php 
                             include('contenido/modal/catalogo/modalcatalogo.php');
                             include('contenido/modal/catalogo/editmodalcatalogo.php');
 
                             ?>
-                                <a class="btn btn-success float-right" href="#" data-toggle="modal" data-target="#modalcatalogo"><i class="fas fa-plus"></i> Crear</a>
+                            <a class="btn btn-success float-right" href="#" data-toggle="modal"
+                                data-target="#modalcatalogo"><i class="fas fa-plus"></i> Crear</a>
 
                             <h3>Catalogo de Cuentas</h3>
-                        <div class="card" id="task-result">
-                            <div class="card-body">
-
-                                <ul id="container"></ul>
-                                
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <form action="code.php" method="POST" enctype="multipart/form-data">
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="inputGroupFile04"
+                                                    aria-describedby="inputGroupFileAddon04" name="import_file">
+                                                <label class="custom-file-label" for="inputGroupFile04">Subir
+                                                    archivo</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <button type="submit" name="save_excel_data"
+                                                    class="btn btn-outline-secondary"
+                                                    id="inputGroupFileAddon04">Button</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-
                             <form id="task-from">
                                 <table id="datatable" class="table">
                                     <thead>
@@ -77,7 +89,7 @@ include('contenido/head.php');
                                         </tr>
                                     </tbody>
                                 </table>
-                                
+
                             </form>
 
 
@@ -123,12 +135,13 @@ include('contenido/head.php');
                     <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
 
     <?php
     include('contenido/js.php')
     ?>
+
 
     <script src="js/ajax.js"></script>
 
