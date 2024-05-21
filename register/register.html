@@ -14,6 +14,7 @@
     <title>Registro</title>
 
     <!-- Icons font CSS-->
+    
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <!-- Font special for pages-->
@@ -22,6 +23,8 @@
     <!-- Vendor CSS-->
     <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    
 
     <!-- Main CSS-->
     <link href="css/main.css" rel="stylesheet" media="all">
@@ -32,6 +35,8 @@
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
+
+                   
                     
                 <div id="register" class="bloque">
                     <h2 class="title">Registrarse</h2>
@@ -80,15 +85,21 @@
                             <label class="label">Contraseña</label>
                             <input class="input--style-4" type="password" id="clave" name="clave" >
                            
+                            
 
                             <div class="rs-select2 js-select-simple select--no-search">                             
                                 <div class="select-dropdown"></div>
                             </div>
                         </div>
+
                         <div class="p-t-15">
                             <button type="Submit" class="btn btn--radius-2 btn--blue" id="enviarDatos">Registrarse</button>
-                            
                         </div>
+
+                        <div class="p-t-15 w-50 text-left" id="login">
+                            <button class="btn btn--radius-2 btn--green" target="_blank" id="enviarLogin">Iniciar Sesión</button>
+                        </div>
+
                     </form>
 
 
@@ -109,6 +120,7 @@
     <!-- Main JS-->
     <script src="js/global.js"></script>
     <script src="js/helpers.js"></script>
+
     
 
     <!-- <script>
@@ -131,6 +143,8 @@
         })
     </script> -->
     
+     <!-- SweetAlert2 -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 

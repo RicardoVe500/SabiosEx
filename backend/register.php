@@ -15,29 +15,24 @@ if(isset($_POST)){
 
     $clave_segura = password_hash($clave, PASSWORD_BCRYPT, ['cost'=>4]);
 
-    if($email == ""){
-        echo "<script>alert('Debe ingresar su correo'); history.go(-1);</script>";
-    } else if ($clave == ""){
-        echo "<script>alert('Debe ingresar su clave'); history.go(-1);</script>";
-    } else if ($nombre == ""){
-        echo "<script>alert('Debe ingresar su nombre'); history.go(-1);</script>";
-    } else if ($apellidos == ""){
-        echo "<script>alert('Debe ingresar su apellido'); history.go(-1);</script>";
-
-    }else{
-        $ins = mysqli_query($bd,
-        "INSERT INTO usuarios (nombre, apellidos, email, clave, fechaAgrega)
-         VALUES ('$nombre','$apellidos','$email','$clave_segura','$fecha')
-         ") or die ("ERROR INS: ".mysqli_error($bd));
-        }
-
-/*     if($ins){
-        echo "<script>alert('Insert con exito'); history.go(-1);</script>";
+    $query = "SELECT * FROM usuarios WHERE email = '$email'";//Mostrar al usuario que ese correo ya esta registrado
+    $result = mysqli_query($bd, $query);
+    
+    if (mysqli_num_rows($result) > 0) {
+        // El correo ya está registrado
+        echo "El correo electrónico ya está registrado.";
     } else {
-        echo "<script>alert('Algo fallo'); history.go(-1);</script>";
-    } */
+        // Insertar los datos en la base de datos
+        $query = "INSERT INTO usuarios (nombre, apellidos, email, clave) VALUES ('$nombre', '$apellidos', '$email', '$clave')";
+        if (mysqli_query($bd, $query)) {
+            echo "Registro exitoso.";
+            
+        } else {
+            echo "Error al registrar los datos: ". mysqli_error($bd);
+        }
+    }
+    
+    // Cerrar la conexión
+    mysqli_close($bd);
 
 }
-
-header('Location: register/register.html');
-

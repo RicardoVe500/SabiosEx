@@ -1,7 +1,7 @@
 <?php
 
 //Conexion a la base de datos
-require_once 'conexion.php';
+require_once '../backend/conexion.php';
 
 if (isset($_POST)){
 
