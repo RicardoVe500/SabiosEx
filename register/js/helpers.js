@@ -5,29 +5,41 @@ $(function() {
         event.preventDefault(); // Evitar el comportamiento por defecto (en este caso, la recarga de la página)
 
         // Validaciones
-        if ($("#nombre").val() == "") {
+        if ($("#nombre").val().trim() === "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Campo vacío',
                 text: 'Debes ingresar el nombre'
             });
-        } else if ($("#apellidos").val() == "") {
+        } else if ($("#apellidos").val().trim() === "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Campo vacío',
                 text: 'Debes ingresar los apellidos'
             });
-        } else if ($("#email").val() == "") {
+        } else if ($("#email").val().trim() === "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Campo vacío',
                 text: 'Debes ingresar el correo'
             });
-        } else if ($("#clave").val() == "") {
+        } else if ($("#clave").val().trim() === "") {
             Swal.fire({
                 icon: 'warning',
                 title: 'Campo vacío',
                 text: 'Debes ingresar la contraseña'
+            });
+        } else if (/\d/.test($("#nombre").val())) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Nombre inválido',
+                text: 'El nombre no debe contener números'
+            });
+        } else if (/\d/.test($("#apellidos").val())) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Apellidos inválidos',
+                text: 'Los apellidos no deben contener números'
             });
         } else {
             // Si todas las validaciones pasan, enviar los datos a través de AJAX
@@ -46,26 +58,27 @@ $(function() {
                 clave: clave
             };
 
-            // Enviar una solicitud AJAX al archivo "registro.php" en el backend
+            // Enviar una solicitud AJAX al archivo "register.php" en el backend
             $.ajax({
                 type: 'POST',
                 url: '../backend/register.php', // Asegúrate de que esta ruta sea correcta
                 data: datos,
+                dataType: 'json', // Esperar una respuesta JSON del servidor
                 success: function(response) {
                     // Manejar la respuesta del servidor
-                    if (response.includes("El correo electronico ya está registrado")) {
+                    if (response.status === 'error') {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Correo duplicado',
-                            text: response
+                            title: 'Error',
+                            text: response.message
                         });
-                    } else if (response.includes("Registro exitoso")) {
+                    } else if (response.status === 'success') {
                         Swal.fire({
                             icon: 'success',
                             title: 'Registro exitoso',
-                            text: response
+                            text: response.message
                         }).then(() => {
-                            
+                            // Limpiar los campos del formulario
                             $("#nombre").val('');
                             $("#apellidos").val('');
                             $("#email").val('');
@@ -75,7 +88,7 @@ $(function() {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: response
+                            text: 'El correo electrónico ya está registrado.'
                         });
                     }
                 },
@@ -107,7 +120,7 @@ $(function() {
             success: function(response) {
                 // Mostrar el mensaje de SW (carga)
                 Swal.fire({
-                    title: "Cambiando a Registro",
+                    title: "Cambiando a Inicio de Sesión",
                     html: "Cargando...",
                     timer: 300, // Ajusta el tiempo en milisegundos si es necesario
                     timerProgressBar: true,
@@ -130,79 +143,5 @@ $(function() {
                 });
             }
         });
-    });
-});
-
-//Boton de carga para registro AJAX (Esto se encuentra en login.php)
-$(function() {
-    $("#enviarLogin").click(function(event) {
-        event.preventDefault(); // Evitar el comportamiento por defecto (en este caso, la recarga de la página)
-
-        // Validaciones
-        if ($("#email").val() == "") {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Campo vacío',
-                text: 'Debes ingresar el correo'
-            });
-        } else if ($("#clave").val() == "") {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Campo vacío',
-                text: 'Debes ingresar la contraseña'
-            });
-        } else {
-            // Si todas las validaciones pasan, enviar los datos a través de AJAX
-
-            // Obtener los datos del formulario
-            var email = $("#email").val();
-            var clave = $("#clave").val();
-
-            // Construir el objeto de datos que deseas enviar al servidor
-            var datos = {
-                email: email,
-                clave: clave
-            };
-
-            // Enviar una solicitud AJAX al archivo "login.php" en el backend
-            $.ajax({
-                type: 'POST',
-                url: '../backend/login.php', // Asegúrate de que esta ruta sea correcta
-                data: datos,
-                success: function(response) {
-                    // Manejar la respuesta del servidor
-                    if (response.includes("Login incorrecto!!")) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Correo o contraseña incorrectos'
-                        });
-                    } else if (response.includes("Login exitoso")) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Login exitoso',
-                            text: response
-                        }).then(() => {
-                            // Redirigir a la página principal después del inicio de sesión exitoso
-                            window.location.href = '../index.php';
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Ocurrió un error. Por favor, inténtelo de nuevo.'
-                        });
-                    }
-                },
-                error: function(xhr, status, error) {
-                    // Manejar errores de la solicitud AJAX
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Error al procesar la solicitud. Por favor, inténtelo de nuevo.'
-                    });
-                }
-            });
-        }
     });
 });
