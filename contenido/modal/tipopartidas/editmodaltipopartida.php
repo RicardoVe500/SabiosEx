@@ -1,0 +1,38 @@
+<div class="modal fade" id="editmodaltipopartida" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form id="editform">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <input class="form-control" type="hidden" name="tipoPartidaId" id="tipoPartidaId" >
+
+                                <label for="Nombrecuenta">Numero Cuenta:</label>
+                                <input class="form-control" type="text" placeholder="Nombre Cuenta" id="editnombretipo">
+                            </div>
+                            <div class="col">
+                                <label for="Nombrecuenta">Nombre Cuenta:</label>
+                                <input class="form-control" type="text" placeholder="Nombre Cuenta" id="editdescripciontipo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-success" type="button" id="editartipopartida"><i class="fas fa-edit"></i> Editar</button>
+                </div>
+
+
+            </form>
+
+        </div>
+    </div>
+</div>

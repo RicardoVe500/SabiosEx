@@ -16,6 +16,14 @@ fechaModifica   datetime,
 CONSTRAINT pk_empresa PRIMARY KEY(empresaId)
 );
 
+CREATE TABLE estado(
+estadoId       int(10) auto_increment not null,
+estado   varchar(100) not null,
+CONSTRAINT pk_estado PRIMARY KEY(estadoId)
+
+);
+
+
 CREATE TABLE tipoUsuario(
 tipoUsuarioId      int(10) auto_increment not null,
 codigotipo         varchar(100) not null,
@@ -23,7 +31,7 @@ nombreTipo         varchar(255),
 descripcion        varchar(255),
 usuarioAgrega      varchar(150),
 fechaAgrega        date,
-usuariosModifica   varchar(255),
+usuarioModifica   varchar(255),
 fechaModifica      datetime,
 
 CONSTRAINT pk_tipoUsuario PRIMARY KEY(tipoUsuarioId)
@@ -86,6 +94,24 @@ tipoContactoId       int(10) auto_increment not null,
 tipoContacto         varchar(255),
 
 CONSTRAINT pk_tipoContacto PRIMARY KEY(tipoContactoId)
+);
+
+CREATE TABLE partidas(
+partidaId       int(10) auto_increment not null,
+tipoPartidaId   varchar(100) not null,
+estadoId   varchar(100) not null,
+codigoPartida   varchar(100) not null,
+fechacontable      datetime,
+fechaActual      datetime,
+usuarioAgrega      varchar(150),
+fechaAgrega        date,
+usuarioModifica   varchar(255),
+fechaModifica      datetime,
+
+CONSTRAINT pk_partidas PRIMARY KEY(partidaId)
+CONSTRAINT fk_estado FOREIGN KEY(estadoId) REFERENCES estado(estadoId)
+CONSTRAINT fk_tipoPartida FOREIGN KEY(tipoPartidaId) REFERENCES tipoPartida(tipoPartidaId)
+
 );
 
 CREATE TABLE usuarios(
@@ -151,7 +177,7 @@ cierreId            int(10) auto_increment not null,
 periodoId           int(10) not null,
 fechaCierre         datetime,
 usuarioAgrega       varchar(255),
-fechaAgrega         date,
+fechaAgrega         datetime,
 usuarioModifica     varchar(255),
 fechaModifica       datetime,
 
@@ -170,12 +196,12 @@ n5                  varchar(255),
 n6                  varchar(255),
 n7                  varchar(255),
 n8                  varchar(255),
-numeroCuenta        int(20),
+numeroCuenta        varchar(255),
 cuentaDependiente   varchar(255),
-nivelCuenta         char(50),
+nivelCuenta         varchar(255),
 nombreCuenta        varchar(255),       
 usuarioAgrega       varchar(255),
-fechaAgrega         date,
+fechaAgrega         datetime,
 usuarioModifica     varchar(255),
 fechaModifica       datetime,
 
@@ -220,7 +246,7 @@ diferencia              char(50),
 conceptoGeneral         varchar(255),
 estado                  varchar(50),
 usuarioAgrega           varchar(255),
-fechaAgrega             date,
+fechaAgrega             datetime,
 usuarioModifica         varchar(255),
 fechaModifica           datetime,
 
@@ -240,7 +266,7 @@ numeroComprobante       int(100),
 fechaComprobante        date,
 concepto                varchar(255),
 usuarioAgrega           varchar(255),
-fechaAgrega             date,
+fechaAgrega             datetime,
 usuarioModifica         varchar(255),
 fechaModifica           datetime,
 
